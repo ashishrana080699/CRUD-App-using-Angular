@@ -1,0 +1,27 @@
+<form class="form-inline">
+    <input class="form-control" name="searchInput" placeholder="Search"  [(ngModel)]="searchText" style="width: 80%;">
+    <button class="btn btn-outline-primary" (click)="searchText=''">X</button>
+  </form>
+  <table class="table table-sm">
+    <thead>
+      <th>Full Name</th>
+      <th>Email</th>
+      <th>Mobile</th>
+      <th></th>
+    </thead>
+    <ng-container *ngFor="let customer of custarray">
+      <tr class="table-dark"  *ngIf="filterCondition(customer)">
+        <td>{{customer.fullname}}</td>
+        <td>{{customer.email}}</td>
+          <td>{{customer.mobile}}</td>
+          <td>
+            <button class="btn btn-outline-info" (click)="obj.populateForm(customer)">Edit</button>
+            <button class="btn btn-outline-danger" (click)="ondelete(customer.$key)">Delete</button>
+          </td>
+      </tr>
+    </ng-container>
+  </table>
+<div class="alert alert-danger" *ngIf="showDeletedMessage">
+    Deleted successfully.
+  </div>
+  <!--{{custarray[1].fullname}}-->
